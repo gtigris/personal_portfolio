@@ -2600,6 +2600,11 @@ side-channel@^1.1.0:
     side-channel-map "^1.0.1"
     side-channel-weakmap "^1.0.2"
 
+simple-parallax-js@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/simple-parallax-js/-/simple-parallax-js-6.0.1.tgz#fb6ca7a993bd9d22cd1c51aa8f59f850d493d89d"
+  integrity sha512-b66Yz2CFsjHo+AavznoSnKpBBhdQ2cXWIdLNVbgyp2/Arbk+OhoabTqWp7KrRbAyBcr8KGd91ilKW6HC6fnuUg==
+
 simple-swizzle@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/simple-swizzle/-/simple-swizzle-0.2.2.tgz#a4da6b635ffcccca33f70d17cb92592de95e557a"

@@ -12,7 +12,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-export const GMainVisual = React.forwardRef<
+export const GCarousel = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
@@ -62,4 +62,4 @@ export const GMainVisual = React.forwardRef<
   );
 });
 
-GMainVisual.displayName = "GMainVisual";
+GCarousel.displayName = "GCarousel";

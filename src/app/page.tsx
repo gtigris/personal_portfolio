@@ -1,13 +1,15 @@
 import { GButton } from "@/components/ui/gButton";
-import GHeader from "@/components/ui/Header/gHeader";
+import GHeader from "@/components/ui/Header/GHeader";
+
 import GIcon from "@/components/ui/gIcon";
 import { cn } from "@/lib/utils";
-import { GMainVisual } from "@/components/ui/MainVisual/gMainVisual";
+import { GCarousel } from "@/components/ui/Carousel/GCarousel";
+import GMainVisual from "@/components/ui/MainVisual/GMainVisual";
 
 export default function HomePage() {
   return (
     <>
-      <div className={cn("bg-slate-200 w-dvw h-dvh")}>
+      <div className={cn("bg-slate-200 w-dvw min-h-dvh")}>
         <div>
           <h1 className={cn("text-center text-7xl font-bold")}>Modules</h1>
           <h2>GButton</h2>
@@ -30,8 +32,14 @@ export default function HomePage() {
           <GHeader />
         </div>
         <div className={cn("mt-4 border-t-2 border-slate-700")}>
-          <h2>GMainVisual</h2>
+          <h2>GCarousel</h2>
           <div className={cn("flex justify-center align-middle")}>
+            <GCarousel />
+          </div>
+        </div>
+        <div className={cn("mt-4 border-t-2 border-slate-700")}>
+          <h2>GMainVisual</h2>
+          <div>
             <GMainVisual />
           </div>
         </div>

@@ -1,8 +1,8 @@
-"use client";
-import * as React from "react";
-import { cn } from "@/lib/utils"; // adjust path as needed
+'use client';
 
-import { Card, CardContent } from "@/components/ui/card";
+import * as React from 'react';
+import { cn } from '@/lib/utils';
+import { Card, CardContent } from '@/components/ui/card';
 import {
   Carousel,
   CarouselApi,
@@ -10,56 +10,81 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel";
+} from '@/components/ui/carousel';
 
 export const GCarousel = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
   const [api, setApi] = React.useState<CarouselApi>();
-  const [current, setCurrent] = React.useState(0);
-  const [count, setCount] = React.useState(0);
+  const [current, setCurrent] = React.useState<number | null>(null);
+  const realSlides = Array.from({ length: 5 }).map((_, i) => i); // [0, 1, 2, 3, 4]
+  const allSlides = [-1, ...realSlides, -2]; // Add dummy slides
 
   React.useEffect(() => {
-    if (!api) {
-      return;
-    }
+    if (!api) return;
 
-    setCount(api.scrollSnapList().length);
-    setCurrent(api.selectedScrollSnap() + 1);
+    const updateCenteredIndex = () => {
+      const snap = api.selectedScrollSnap();
+      const adjustedSnap = snap + 1;
+      const maxSnap = realSlides.length + 1;
 
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap() + 1);
-    });
-  }, [api]);
+      if (adjustedSnap === maxSnap) {
+        setCurrent(null);
+      } else {
+        setCurrent(adjustedSnap - 1);
+      }
+    };
+
+    updateCenteredIndex();
+    api.on('select', updateCenteredIndex);
+    api.on('resize', updateCenteredIndex);
+
+    return () => {
+      api.off('select', updateCenteredIndex);
+      api.off('resize', updateCenteredIndex);
+    };
+  }, [api, realSlides.length]);
 
   return (
-    <Carousel
-      setApi={setApi}
-      ref={ref}
-      className={cn("w-full max-w-xs", className)}
-      {...props}
-    >
-      <CarouselContent>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <CarouselItem key={index}>
-            <div className="p-1">
-              <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <span className="text-4xl font-semibold">{index + 1}</span>
-                </CardContent>
-              </Card>
-            </div>
-          </CarouselItem>
-        ))}
+    <Carousel className="w-full" ref={ref} setApi={setApi} {...props}>
+      <CarouselContent className="-ml-1">
+        {allSlides.map((index, mappedIndex) => {
+          const isDummy = index === -1 || index === -2;
+
+          return (
+            <CarouselItem
+              key={mappedIndex}
+              className={cn(
+                'pl-1 md:basis-1/2 lg:basis-1/3 transition-all duration-300',
+                !isDummy && current !== index && 'opacity-50'
+              )}
+            >
+              <div className="p-1">
+                {isDummy ? (
+                  <div className="aspect-square w-full h-full invisible" />
+                ) : (
+                  <Card>
+                    <CardContent
+                      className="flex aspect-square items-center justify-center p-6"
+                      onClick={() => alert(`Clicked on slide ${index + 1}`)}
+                    >
+                      <span className="text-2xl font-semibold">
+                        {index + 1} (current:{' '}
+                        {current !== null ? current + 1 : 0})
+                      </span>
+                    </CardContent>
+                  </Card>
+                )}
+              </div>
+            </CarouselItem>
+          );
+        })}
       </CarouselContent>
       <CarouselPrevious />
       <CarouselNext />
-      <p>
-        {current} out of {count}
-      </p>
     </Carousel>
   );
 });
 
-GCarousel.displayName = "GCarousel";
+GCarousel.displayName = 'GCarousel';

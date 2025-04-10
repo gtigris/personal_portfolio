@@ -5,6 +5,7 @@ import GIcon from "@/components/ui/gIcon";
 import { cn } from "@/lib/utils";
 import { GCarousel } from "@/components/ui/Carousel/GCarousel";
 import GMainVisual from "@/components/ui/MainVisual/GMainVisual";
+import GCard from "@/components/ui/Card/GCard";
 
 export default function HomePage() {
   return (
@@ -42,6 +43,16 @@ export default function HomePage() {
           <div>
             <GMainVisual />
           </div>
+        </div>
+        <div className={cn("mt-4 border-t-2 border-slate-700")}>
+          <h2>GCard</h2>
+          <div className=" w-full bg-gray-500 flex align-middle justify-center">
+            <GCard />
+          </div>
+        </div>
+        <div className={cn("mt-4 border-t-2 border-slate-700 ")}>
+          <h2>GComponent</h2>
+          <div>GComponent Content</div>
         </div>
       </div>
     </>

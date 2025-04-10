@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { GCarousel } from "@/components/ui/Carousel/GCarousel";
 import GMainVisual from "@/components/ui/MainVisual/GMainVisual";
 import GCard from "@/components/ui/Card/GCard";
+import GImage from "@/components/ui/Image/GImage";
 
 export default function HomePage() {
   return (
@@ -48,6 +49,17 @@ export default function HomePage() {
           <h2>GCard</h2>
           <div className=" w-full bg-gray-500 flex align-middle justify-center">
             <GCard />
+          </div>
+        </div>
+        <div className={cn("mt-4 border-t-2 border-slate-700 ")}>
+          <h2>GImage</h2>
+          <div>
+            <GImage
+              src="/mainVisual.jpg"
+              alt={"mainVisual"}
+              type="cover"
+              // className="h-[400px]"
+            />
           </div>
         </div>
         <div className={cn("mt-4 border-t-2 border-slate-700 ")}>

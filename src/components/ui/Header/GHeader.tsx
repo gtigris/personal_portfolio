@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import ButtonCollection from "./buttonCollection";
+import ButtonCollection from "./ButtonCollection";
 
 export default function GHeader() {
   return (

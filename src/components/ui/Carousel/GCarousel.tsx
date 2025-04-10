@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import { cn } from '@/lib/utils';
-import { Card, CardContent } from '@/components/ui/card';
+import * as React from "react";
+import { cn } from "@/lib/utils";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselApi,
@@ -10,7 +10,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '@/components/ui/carousel';
+} from "@/components/ui/carousel";
 
 export const GCarousel = React.forwardRef<
   HTMLDivElement,
@@ -37,17 +37,22 @@ export const GCarousel = React.forwardRef<
     };
 
     updateCenteredIndex();
-    api.on('select', updateCenteredIndex);
-    api.on('resize', updateCenteredIndex);
+    api.on("select", updateCenteredIndex);
+    api.on("resize", updateCenteredIndex);
 
     return () => {
-      api.off('select', updateCenteredIndex);
-      api.off('resize', updateCenteredIndex);
+      api.off("select", updateCenteredIndex);
+      api.off("resize", updateCenteredIndex);
     };
   }, [api, realSlides.length]);
 
   return (
-    <Carousel className="w-full" ref={ref} setApi={setApi} {...props}>
+    <Carousel
+      className={cn(className, "w-full")}
+      ref={ref}
+      setApi={setApi}
+      {...props}
+    >
       <CarouselContent className="-ml-1">
         {allSlides.map((index, mappedIndex) => {
           const isDummy = index === -1 || index === -2;
@@ -56,8 +61,8 @@ export const GCarousel = React.forwardRef<
             <CarouselItem
               key={mappedIndex}
               className={cn(
-                'pl-1 md:basis-1/2 lg:basis-1/3 transition-all duration-300',
-                !isDummy && current !== index && 'opacity-50'
+                "pl-1 md:basis-1/2 lg:basis-1/3 transition-all duration-300",
+                !isDummy && current !== index && "opacity-50"
               )}
             >
               <div className="p-1">
@@ -67,10 +72,16 @@ export const GCarousel = React.forwardRef<
                   <Card>
                     <CardContent
                       className="flex aspect-square items-center justify-center p-6"
-                      onClick={() => alert(`Clicked on slide ${index + 1}`)}
+                      onClick={() => {
+                        if (current === index) {
+                          alert(`Clicked on slide ${index + 1}`);
+                        } else {
+                          api?.scrollTo(index);
+                        }
+                      }}
                     >
                       <span className="text-2xl font-semibold">
-                        {index + 1} (current:{' '}
+                        {index + 1} (current:{" "}
                         {current !== null ? current + 1 : 0})
                       </span>
                     </CardContent>
@@ -87,4 +98,4 @@ export const GCarousel = React.forwardRef<
   );
 });
 
-GCarousel.displayName = 'GCarousel';
+GCarousel.displayName = "GCarousel";

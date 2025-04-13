@@ -1,28 +1,46 @@
-import React from "react";
-import Image, { ImageProps } from "next/image";
-import { cn } from "@/lib/utils";
+import React from 'react';
+import Image, { ImageProps } from 'next/image';
+import { cn } from '@/lib/utils';
 
 interface GImageProps extends ImageProps {
-  type?: "contain" | "cover";
+  objectFit?: 'contain' | 'cover';
   src: string;
   alt: string;
+  intrinsicWidth?: number;
+  intrinsicHeight?: number;
 }
 
 const GImage = React.forwardRef<HTMLImageElement, GImageProps>(
-  ({ className, type = "cover", src, alt, ...props }) => {
+  (
+    {
+      className,
+      objectFit = 'center',
+      src,
+      alt,
+      intrinsicWidth,
+      intrinsicHeight,
+      ...props
+    },
+    ref
+  ) => {
     return (
-      <div className={cn("relative", "h-60", className)}>
-        <Image
-          className={cn("object-center", type && `object-${type}`)}
-          src={src}
-          alt={alt}
-          fill={!!type}
-          {...props}
-        />
-      </div>
+      <Image
+        className={cn(
+          objectFit === 'cover' && 'size-full object-cover',
+          objectFit === 'contain' && 'size-auto object-contain',
+          className
+        )}
+        ref={ref}
+        src={src}
+        alt={alt}
+        width={intrinsicWidth}
+        height={intrinsicHeight}
+        fill={!!objectFit}
+        {...props}
+      />
     );
   }
 );
 
-GImage.displayName = "GImage";
+GImage.displayName = 'GImage';
 export default GImage;

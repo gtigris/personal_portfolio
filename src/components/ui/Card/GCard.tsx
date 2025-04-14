@@ -7,6 +7,7 @@ import {
   CardContent,
   CardFooter,
 } from "../card";
+import { cn } from "@/lib/utils";
 
 interface GCardProps extends React.HTMLAttributes<HTMLDivElement> {
   cardTitle?: React.ReactNode;
@@ -30,8 +31,8 @@ function GCardInner(
   ref: React.Ref<HTMLDivElement>
 ) {
   return (
-    <Card ref={ref} className={`w-[350px] ${className || ""}`} {...props}>
-      <div className="h-[200px] bg-blue-400">{cardMainVisual}</div>
+    <Card ref={ref} className={cn("w-[350px] h-[500px]", className)} {...props}>
+      <div className="h-[250px] relative">{cardMainVisual}</div>
       <CardHeader>
         <CardTitle>{cardTitle}</CardTitle>
         <CardDescription>{cardDescription}</CardDescription>

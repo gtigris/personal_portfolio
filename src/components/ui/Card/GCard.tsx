@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Card,
   CardHeader,
@@ -6,8 +6,8 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "../card";
-import { cn } from "@/lib/utils";
+} from '../card';
+import { cn } from '@/lib/utils';
 
 interface GCardProps extends React.HTMLAttributes<HTMLDivElement> {
   cardTitle?: React.ReactNode;
@@ -31,7 +31,7 @@ function GCardInner(
   ref: React.Ref<HTMLDivElement>
 ) {
   return (
-    <Card ref={ref} className={cn("w-[350px] h-[500px]", className)} {...props}>
+    <Card ref={ref} className={cn('w-[325px] h-[500px]', className)} {...props}>
       <div className="h-[250px] relative">{cardMainVisual}</div>
       <CardHeader>
         <CardTitle>{cardTitle}</CardTitle>

@@ -1,11 +1,12 @@
-import React from 'react';
+import { GButton } from '@/components/ui/Button/GButton';
+import GCard from '@/components/ui/Card/GCard';
+import { GCarousel } from '@/components/ui/Carousel/GCarousel';
 import { GHeader } from '@/components/ui/Header/GHeader';
+import GImage from '@/components/ui/Image/GImage';
+import GStepper from '@/components/ui/Stepper/GStepper';
 import GIcon from '@/components/ui/gIcon';
 import { cn } from '@/lib/utils';
-import { GCarousel } from '@/components/ui/Carousel/GCarousel';
-import GCard from '@/components/ui/Card/GCard';
-import GImage from '@/components/ui/Image/GImage';
-import { GButton } from '@/components/ui/Button/GButton';
+import React from 'react';
 
 export default function HomePage() {
   return (
@@ -82,6 +83,12 @@ export default function HomePage() {
               alt={'mainVisual'}
               objectFit="contain"
             />
+          </div>
+        </div>
+        <div className={cn('mt-4 border-t-2 border-slate-700 ')}>
+          <h2>GStepper</h2>
+          <div>
+            <GStepper />
           </div>
         </div>
         <div className={cn('mt-4 border-t-2 border-slate-700 ')}>

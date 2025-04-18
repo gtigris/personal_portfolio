@@ -1,6 +1,6 @@
-"use client";
-import { cn } from "@/lib/utils";
-import { GButton } from "../gButton";
+'use client';
+import { cn } from '@/lib/utils';
+import { GButton } from '../Button/GButton';
 
 const underlineSlide = `
 relative after:absolute after:left-0 after:bottom-0
@@ -10,21 +10,21 @@ group-hover:after:w-full
 `;
 const buttons = [
   {
-    label: "Home",
+    label: 'Home',
     className: underlineSlide,
   },
   {
-    label: "About",
+    label: 'About',
     className: underlineSlide,
   },
   {
-    label: "Projects",
+    label: 'Projects',
     className: underlineSlide,
   },
   {
-    label: "Contact",
+    label: 'Contact',
     className: underlineSlide,
-    onClick: () => alert("hello"),
+    onClick: () => alert('hello'),
   },
 ];
 

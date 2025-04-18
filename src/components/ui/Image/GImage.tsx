@@ -1,6 +1,6 @@
-import React from 'react';
-import Image, { ImageProps } from 'next/image';
 import { cn } from '@/lib/utils';
+import Image, { type ImageProps } from 'next/image';
+import React from 'react';
 
 interface GImageProps extends ImageProps {
   objectFit?: 'contain' | 'cover';

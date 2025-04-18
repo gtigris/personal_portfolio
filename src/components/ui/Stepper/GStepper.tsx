@@ -3,21 +3,21 @@ import { motion } from 'framer-motion';
 
 export default function GStepper() {
   return (
-    <div className="relative size-20">
+    <div className="flex items-center">
       <GStep />
-
-      {/* 
-      <GRoad /> */}
+      <GRoad />
+      <GStep />
     </div>
   );
 }
+
 export function GStep() {
   return (
-    <>
+    <div className="relative w-20 h-20 flex items-center justify-center">
+      {/* animated circle */}
       <motion.svg
-        className="absolute inset-0 z-20"
+        className="w-full h-full z-10"
         viewBox="0 0 100 100"
-        shapeRendering="geometricPrecision"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
@@ -35,15 +35,48 @@ export function GStep() {
           r="45"
           stroke="black"
           strokeWidth="2"
-          strokeDasharray="160 50"
+          strokeDasharray="150 30"
           strokeLinecap="round"
         />
       </motion.svg>
-      <div className="absolute inset-0 rounded-full bg-black z-10 size-8 m-auto" />
-    </>
+
+      {/* black ball in the center */}
+      <div className="absolute w-8 h-8 bg-black rounded-full z-20" />
+    </div>
   );
 }
 
 export function GRoad() {
-  return <div className="w-10 h-1 bg-gray-300" />;
+  return (
+    <>
+      <motion.svg
+        viewBox="0 0 200 40"
+        className="w-[200px] h-4"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        preserveAspectRatio="none"
+        focusable="false"
+      >
+        <motion.line
+          x1="0"
+          y1="20"
+          x2="200"
+          y2="20"
+          stroke="black"
+          strokeWidth="10"
+          strokeDasharray="40 40" // 10px dash, 10px gap
+          animate={{
+            strokeDashoffset: [0, -80], // move dash to the left
+          }}
+          transition={{
+            repeat: Number.POSITIVE_INFINITY,
+            repeatType: 'loop',
+            ease: 'linear',
+            duration: 1,
+          }}
+        />
+      </motion.svg>
+    </>
+  );
 }

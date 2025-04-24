@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 export default function GStepper() {
   return (
     <div className="flex flex-col items-center">
-      <GStep onClick={() => console.log("Step 1 clicked")} />
+      <GStep onClick={() => alert("Step 1 clicked")} />
       <GRoad />
-      <GStep onClick={() => console.log("Step 2 clicked")} />
+      <GStep onClick={() => alert("Step 2 clicked")} />
     </div>
   );
 }
@@ -47,7 +47,7 @@ const spinCWVariants = {
     rotate: 360,
     transition: {
       repeat: Number.POSITIVE_INFINITY,
-      ease: "linear",
+      ease: "circInOut",
       duration: 2,
       delay: 0.3, // after scale
     },

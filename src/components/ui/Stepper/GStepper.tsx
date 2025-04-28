@@ -102,10 +102,10 @@ export function GStep({ onClick }: GStepProps) {
           <motion.circle
             cx="50"
             cy="50"
-            r="45"
+            r="49"
             stroke="black"
             strokeWidth="2"
-            strokeDasharray="35.34 35.34"
+            strokeDasharray="37.5 37.5"
             strokeLinecap="butt"
             variants={spinCWVariants}
           />

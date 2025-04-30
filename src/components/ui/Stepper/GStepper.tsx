@@ -5,7 +5,7 @@ import React from "react";
 import { GStepperPopover } from "./GStepperPopover";
 import GStepperPopoverContent from "./GStepperPopoverContent";
 import GList from "../List/GList";
-
+//TODO: create a reverse colored one for job experience
 export default function GStepper() {
   return (
     <div className="flex flex-col items-center">

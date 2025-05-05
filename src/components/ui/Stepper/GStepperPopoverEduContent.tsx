@@ -13,7 +13,7 @@ interface GStepperPopoverContent {
   badges: string[];
 }
 
-export default function GStepperPopoverContent({
+export default function GStepperPopoverEduContent({
   title,
   location,
   year,
@@ -39,8 +39,8 @@ export default function GStepperPopoverContent({
         <Separator />
         <div className="text-sm">
           <div className=" my-2 flex gap-2">
-            <p className="w-[80%]  ">{subjectMajor}</p>
-            <p className="w-[20%] ">{gpa}</p>
+            <p className="w-[80%]">{subjectMajor}</p>
+            <p className="w-[20%]">{gpa}</p>
           </div>
           <div className="flex justify-between">
             <div className="flex gap-2">
@@ -48,10 +48,7 @@ export default function GStepperPopoverContent({
                 return <Badge key={badge}>{badge}</Badge>;
               })}
             </div>
-            {/* make this a prop */}
-            {/* (2017-2020) */}
           </div>
-          {/* make this a Glist with Mapping */}
           {children}
         </div>
       </div>

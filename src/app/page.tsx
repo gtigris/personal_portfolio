@@ -3,7 +3,9 @@ import GCard from "@/components/ui/Card/GCard";
 import { GCarousel } from "@/components/ui/Carousel/GCarousel";
 import { GHeader } from "@/components/ui/Header/GHeader";
 import GImage from "@/components/ui/Image/GImage";
+import GMainVisual from "@/components/ui/MainVisual/GMainVisual";
 import { GPopover } from "@/components/ui/Popover/GPopover";
+import GSection from "@/components/ui/Section/GSection";
 import GStepper from "@/components/ui/Stepper/GStepper";
 import GIcon from "@/components/ui/gIcon";
 import { cn } from "@/lib/utils";
@@ -96,6 +98,28 @@ export default function HomePage() {
           <h2>GPopover</h2>
           <div>
             <GPopover />
+          </div>
+        </div>
+        <p>
+          My name is Giorgio, I am a FrontEnd Developer. I primarily work with
+          React and Next.js. I design and develop refined, user-centric web
+          applications.
+        </p>
+        <div className={cn("mt-4 border-t-2 border-slate-700 ")}>
+          <h2>GSection</h2>
+          <div>
+            <GSection type="white">
+              <p>test</p>
+            </GSection>
+            <GSection type="black">
+              <p className="text-white">test</p>
+            </GSection>
+          </div>
+        </div>
+        <div className={cn("mt-4 border-t-2 border-slate-700 ")}>
+          <h2>GMainVisual</h2>
+          <div>
+            <GMainVisual />
           </div>
         </div>
         <div className={cn("mt-4 border-t-2 border-slate-700 ")}>

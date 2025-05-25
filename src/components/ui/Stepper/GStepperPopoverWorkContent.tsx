@@ -1,7 +1,7 @@
 import React from "react";
-import { Badge } from "../badge";
 import GImage from "../Image/GImage";
 import { Separator } from "../separator";
+import GBadge from "../Badge/GBadge";
 
 interface GStepperPopoverContent {
   title: string;
@@ -45,7 +45,11 @@ export default function GStepperPopoverWorkContent({
           <div className="flex justify-between">
             <div className="flex gap-2">
               {badges.map((badge: string) => {
-                return <Badge key={badge}>{badge}</Badge>;
+                return (
+                  <GBadge key={badge} variant="secondary">
+                    {badge}
+                  </GBadge>
+                );
               })}
             </div>
           </div>

@@ -1,37 +1,33 @@
-import React from 'react';
+import { cn } from '@/lib/utils';
+import type { HTMLAttributes, ReactNode } from 'react';
 import {
   Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
 } from '../card';
-import { cn } from '@/lib/utils';
 
-interface GCardProps extends React.HTMLAttributes<HTMLDivElement> {
-  cardTitle?: React.ReactNode;
-  cardDescription?: React.ReactNode;
-  cardContent?: React.ReactNode;
-  cardFooter?: React.ReactNode;
-  cardMainVisual?: React.ReactNode;
+interface GCardProps extends HTMLAttributes<HTMLDivElement> {
+  cardTitle?: ReactNode;
+  cardDescription?: ReactNode;
+  cardContent?: ReactNode;
+  cardFooter?: ReactNode;
+  cardMainVisual?: ReactNode;
 }
 
-// Define the inner component
-function GCardInner(
-  {
-    cardTitle,
-    cardDescription,
-    cardContent,
-    cardFooter,
-    cardMainVisual,
-    className,
-    ...props
-  }: GCardProps,
-  ref: React.Ref<HTMLDivElement>
-) {
+function GCard({
+  cardTitle,
+  cardDescription,
+  cardContent,
+  cardFooter,
+  cardMainVisual,
+  className,
+  ...props
+}: GCardProps) {
   return (
-    <Card ref={ref} className={cn('w-[325px] h-[500px]', className)} {...props}>
+    <Card className={cn('w-[325px] h-[500px]', className)} {...props}>
       <div className="h-[250px] relative">{cardMainVisual}</div>
       <CardHeader>
         <CardTitle>{cardTitle}</CardTitle>
@@ -45,6 +41,4 @@ function GCardInner(
   );
 }
 
-// Forward the ref and export with function
-const GCard = React.forwardRef(GCardInner);
 export default GCard;

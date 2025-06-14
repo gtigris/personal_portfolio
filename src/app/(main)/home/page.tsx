@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import AnimatedCard from '@/components/ui/Animation/AnimatedCard';
-import Parallax from '@/components/ui/Animation/Parallax';
-import GMainVisual from '@/components/ui/MainVisual/GMainVisual';
-import GSection from '@/components/ui/Section/GSection';
-import GStepper from '@/components/ui/Stepper/GStepper';
-import GTypography from '@/components/ui/Typography/GTypography';
-import { motion } from 'framer-motion';
+import AnimatedCard from "@/components/ui/Animation/AnimatedCard";
+import Parallax from "@/components/ui/Animation/Parallax";
+import GMainVisual from "@/components/ui/MainVisual/GMainVisual";
+import GSection from "@/components/ui/Section/GSection";
+import GStepper from "@/components/ui/Stepper/GStepper";
+import GTypography from "@/components/ui/Typography/GTypography";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
@@ -16,7 +16,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
           >
             <GMainVisual />
           </motion.div>
@@ -32,7 +32,7 @@ export default function Home() {
             viewport={{ once: true }}
             className="bg-[#183c28] text-center flex items-center justify-center h-screen"
           >
-            <GTypography size={'xl'} weight={'lg'} className="text-white">
+            <GTypography size={"xl"} weight={"lg"} className="text-white">
               Academic & Professional Background
             </GTypography>
           </motion.div>
@@ -73,12 +73,12 @@ export default function Home() {
                 transition={{
                   duration: 0.5,
                   delay: i * 0.1, // Staggered entrance
-                  ease: 'easeOut',
+                  ease: "easeOut",
                 }}
                 viewport={{ once: true }}
               >
                 <AnimatedCard
-                  hoverEffect={'zoom'}
+                  hoverEffect={"zoom"}
                   spotlightEnabled={true}
                   className="bg-white/10 rounded-lg p-6 h-[300px] flex flex-col"
                 >

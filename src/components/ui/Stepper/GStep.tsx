@@ -94,7 +94,7 @@ export const GStep = React.forwardRef<HTMLDivElement, GStepProps>(
         onMouseLeave={() => setHovered(false)}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault(); // prevent scroll on space
+            e.preventDefault();
             onClick?.();
           }
         }}

@@ -76,7 +76,7 @@ const spinCCWVariants = {
 interface GStepProps {
   isActive: boolean;
   onClick?: () => void;
-  yearPosition: string;
+  yearPosition: "left" | "right";
   year: string;
 }
 export const GStep = React.forwardRef<HTMLDivElement, GStepProps>(
@@ -186,7 +186,9 @@ export const GStep = React.forwardRef<HTMLDivElement, GStepProps>(
           size="xl"
           weight="lg"
           className={cn(
-            `absolute -top-5/12 ${yearPosition}-12/12 z-0 pointer-events-none`
+            "absolute -top-5/12 z-0 pointer-events-none",
+            yearPosition === "left" && "left-12/12",
+            yearPosition === "right" && "right-12/12"
           )}
         >
           {year}

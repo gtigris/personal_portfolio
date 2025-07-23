@@ -1,7 +1,7 @@
 'use client';
 
-import AnimatedCard from '@/components/ui/Animation/AnimatedCard';
 import Parallax from '@/components/ui/Animation/Parallax';
+import { GCarousel } from '@/components/ui/Carousel/GCarousel';
 import GMainVisual from '@/components/ui/MainVisual/GMainVisual';
 import GSection from '@/components/ui/Section/GSection';
 import GStepper from '@/components/ui/Stepper/GStepper';
@@ -48,7 +48,6 @@ export default function Home() {
         </div>
       </GSection>
 
-      {/* //TODO: change this to the carousel instead */}
       <GSection type="black">
         <div className="min-h-screen py-20 px-8">
           <motion.div
@@ -59,40 +58,76 @@ export default function Home() {
             className="text-center mb-16"
           >
             <GTypography size="xl" weight="lg" className="text-white">
-              Portfolio Showcase
+              Technical Skills
             </GTypography>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Grid of animated cards with staggered entrance */}
-            {[1, 2, 3, 4, 5, 6].map((item, i) => (
-              <motion.div
-                key={item}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.5,
-                  delay: i * 0.1, // Staggered entrance
-                  ease: 'easeOut',
-                }}
-                viewport={{ once: true }}
-              >
-                <AnimatedCard
-                  hoverEffect={'zoom'}
-                  spotlightEnabled={true}
-                  className="bg-white/10 rounded-lg p-6 h-[300px] flex flex-col"
-                >
-                  <div className="h-40 bg-white/5 rounded mb-4"></div>
-                  <GTypography size="lg" weight="md" className="text-white">
-                    Project {item}
-                  </GTypography>
-                  <p className="mt-2 text-white/70 text-sm">
-                    Interactive portfolio project with custom animations
-                  </p>
-                </AnimatedCard>
-              </motion.div>
-            ))}
-          </div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="max-w-6xl mx-auto"
+          >
+            <GCarousel
+              cardsData={[
+                {
+                  id: 'nextjs',
+                  title: 'Next.js',
+                  description: 'React Framework',
+                  content:
+                    'Advanced proficiency with SSR, API routes, and app router',
+                  imageSrc: '/next.svg',
+                  imageAlt: 'Next.js',
+                },
+                {
+                  id: 'typescript',
+                  title: 'TypeScript',
+                  description: 'Typed JavaScript',
+                  content:
+                    'Strong typing, interfaces, and advanced type operations',
+                  imageSrc: '/file.svg',
+                  imageAlt: 'TypeScript',
+                },
+                {
+                  id: 'tailwind',
+                  title: 'Tailwind CSS',
+                  description: 'Utility-First CSS',
+                  content:
+                    'Responsive design, custom themes, and component styling',
+                  imageSrc: '/window.svg',
+                  imageAlt: 'Tailwind CSS',
+                },
+                {
+                  id: 'react',
+                  title: 'React',
+                  description: 'UI Library',
+                  content:
+                    'Component architecture, hooks, and state management',
+                  imageSrc: '/globe.svg',
+                  imageAlt: 'React',
+                },
+                {
+                  id: 'vue',
+                  title: 'Vue.js',
+                  description: 'Progressive Framework',
+                  content:
+                    'Reactive data binding, composition API, and Single File Components',
+                  imageSrc: '/file.svg',
+                  imageAlt: 'Vue.js',
+                },
+                {
+                  id: 'csharp',
+                  title: 'C#',
+                  description: 'Backend Language',
+                  content: 'ASP.NET Core, Entity Framework, and REST APIs',
+                  imageSrc: '/window.svg',
+                  imageAlt: 'C#',
+                },
+              ]}
+              className="mx-4"
+            />
+          </motion.div>
         </div>
       </GSection>
     </>

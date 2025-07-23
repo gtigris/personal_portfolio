@@ -1,25 +1,58 @@
 'use client';
 
-import * as React from 'react';
-import { cn } from '@/lib/utils';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from '@/components/ui/carousel';
 import type { CarouselApi } from '@/components/ui/carousel';
+import { cn } from '@/lib/utils';
+import * as React from 'react';
+import GCard from '../Card/GCard';
+import GImage from '../Image/GImage';
 import { useElementLayout } from '../_hook/useElementLayout';
 
+// Define the structure for card data
+interface CardData {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  imageSrc: string;
+  imageAlt: string;
+}
+
 interface GCarouselProps extends React.HTMLAttributes<HTMLDivElement> {
-  cardContent: React.ReactNode;
+  cardContent?: React.ReactNode; // Keep for backward compatibility
+  cardContents?: React.ReactNode[]; // Keep for backward compatibility
+  cardsData?: CardData[]; // New data-driven approach
 }
 
 export const GCarousel = React.forwardRef<HTMLDivElement, GCarouselProps>(
-  ({ className, cardContent, ...props }, ref) => {
+  ({ className, cardContent, cardContents, cardsData = [], ...props }, ref) => {
     const layout = useElementLayout();
     const [api, setApi] = React.useState<CarouselApi>();
     const [current, setCurrent] = React.useState<number | null>(null);
-    const realSlides = Array.from({ length: 5 }).map((_, i) => i); // [0, 1, 2, 3, 4]
+
+    // Determine which approach to use based on provided props
+    let contentSource: 'data' | 'contents' | 'content' = 'content';
+    if (cardsData && cardsData.length > 0) {
+      contentSource = 'data';
+    } else if (cardContents && cardContents.length > 0) {
+      contentSource = 'contents';
+    }
+
+    // Get appropriate length based on content source
+    let slidesLength = 0;
+    if (contentSource === 'data') {
+      slidesLength = cardsData.length;
+    } else if (contentSource === 'contents' && cardContents) {
+      slidesLength = cardContents.length;
+    } else {
+      slidesLength = 6; // Default number if using single cardContent
+    }
+
+    const realSlides = Array.from({ length: slidesLength }).map((_, i) => i);
     const allSlides = layout !== 'lg' ? realSlides : [-1, ...realSlides, -2];
 
     React.useEffect(() => {
@@ -99,7 +132,40 @@ export const GCarousel = React.forwardRef<HTMLDivElement, GCarouselProps>(
                         }
                       }}
                     >
-                      {cardContent}
+                      {(() => {
+                        // Determine what content to render based on source type
+                        if (contentSource === 'data') {
+                          // Render card from data
+                          const cardData =
+                            cardsData[
+                              index >= 0 ? index % cardsData.length : 0
+                            ];
+                          return (
+                            <GCard
+                              cardTitle={cardData.title}
+                              cardDescription={cardData.description}
+                              cardContent={<p>{cardData.content}</p>}
+                              cardMainVisual={
+                                <GImage
+                                  src={cardData.imageSrc}
+                                  alt={cardData.imageAlt}
+                                  className="w-full h-full object-cover rounded-t-md"
+                                />
+                              }
+                            />
+                          );
+                        }
+
+                        if (contentSource === 'contents' && cardContents) {
+                          // Render from cardContents array
+                          return cardContents[
+                            index >= 0 ? index % cardContents.length : 0
+                          ];
+                        }
+
+                        // Default: render the same cardContent for all items
+                        return cardContent;
+                      })()}
                     </button>
                   </>
                 )}

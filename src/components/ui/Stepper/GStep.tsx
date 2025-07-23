@@ -1,7 +1,7 @@
-import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
-import React from "react";
-import GTypography from "../Typography/GTypography";
+import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
+import React from 'react';
+import GTypography from '../Typography/GTypography';
 
 //GStep
 const ringVariants = {
@@ -15,7 +15,7 @@ const ringVariants = {
     opacity: 1,
     transition: {
       duration: 0.3,
-      type: "spring",
+      type: 'spring',
       bounce: 0.2,
     },
   },
@@ -30,9 +30,9 @@ const ringVariantsHover = {
     opacity: 1,
     transition: {
       duration: 1.2,
-      ease: "easeOut",
-      repeat: Infinity,
-      repeatType: "loop" as const,
+      ease: 'easeOut',
+      repeat: Number.POSITIVE_INFINITY,
+      repeatType: 'loop' as const,
     },
   },
 };
@@ -41,12 +41,12 @@ export const ringVanishVariants = {
   hidden: {
     scale: 1,
     opacity: 1,
-    transition: { type: "spring", stiffness: 150, damping: 12 },
+    transition: { type: 'spring', stiffness: 150, damping: 12 },
   },
   visible: {
     scale: 0,
     opacity: 0,
-    transition: { type: "spring", stiffness: 150, damping: 12 },
+    transition: { type: 'spring', stiffness: 150, damping: 12 },
   },
 };
 
@@ -55,7 +55,7 @@ const spinCWVariants = {
     rotate: 360,
     transition: {
       repeat: Number.POSITIVE_INFINITY,
-      ease: "circInOut",
+      ease: 'circInOut',
       duration: 2,
       delay: 0.3, // after scale
     },
@@ -66,7 +66,7 @@ const spinCCWVariants = {
     rotate: -360,
     transition: {
       repeat: Number.POSITIVE_INFINITY,
-      ease: "linear",
+      ease: 'linear',
       duration: 2,
       delay: 0.3, // after scale
     },
@@ -76,14 +76,13 @@ const spinCCWVariants = {
 interface GStepProps {
   isActive: boolean;
   onClick?: () => void;
-  yearPosition: string;
   year: string;
 }
 export const GStep = React.forwardRef<HTMLDivElement, GStepProps>(
-  ({ isActive, onClick, yearPosition, year }, ref) => {
+  ({ isActive, onClick, year }, ref) => {
     const [isHovered, setHovered] = React.useState(false);
 
-    const finalAnimation = isActive ? "visible" : isHovered ? "wave" : "hidden";
+    const finalAnimation = isActive ? 'visible' : isHovered ? 'wave' : 'hidden';
 
     return (
       <div
@@ -93,14 +92,14 @@ export const GStep = React.forwardRef<HTMLDivElement, GStepProps>(
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
+          if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault(); // prevent scroll on space
             onClick?.();
           }
         }}
       >
         <motion.div
-          className="relative w-20 h-20 flex items-center justify-center"
+          className="relative w-16 h-16 flex items-center justify-center"
           initial="hidden"
           animate={finalAnimation}
         >
@@ -118,7 +117,7 @@ export const GStep = React.forwardRef<HTMLDivElement, GStepProps>(
             <motion.circle
               cx="50"
               cy="50"
-              r="48"
+              r="42"
               stroke="black"
               strokeWidth="2"
               strokeLinecap="butt"
@@ -138,10 +137,10 @@ export const GStep = React.forwardRef<HTMLDivElement, GStepProps>(
             <motion.circle
               cx="50"
               cy="50"
-              r="49"
+              r="43"
               stroke="black"
               strokeWidth="2"
-              strokeDasharray="37.5 37.5"
+              strokeDasharray="33.5 33.5"
               strokeLinecap="butt"
               variants={spinCWVariants}
             />
@@ -161,33 +160,31 @@ export const GStep = React.forwardRef<HTMLDivElement, GStepProps>(
             <motion.circle
               cx="50"
               cy="50"
-              r="30"
+              r="26"
               stroke="grey"
               strokeWidth="2"
-              strokeDasharray="47.125 47.125"
+              strokeDasharray="40.8 40.8"
               strokeLinecap="butt"
               variants={spinCCWVariants}
             />
           </motion.svg>
 
           <motion.div
-            className="absolute w-20 h-20 bg-white rounded-full z-20 border-2 border-black"
+            className="absolute w-16 h-16 bg-white rounded-full z-20 border-2 border-black"
             variants={ringVanishVariants}
           />
 
           <div
             className={cn(
-              "absolute w-8 h-8 bg-black rounded-full z-30 group-hover:bg-gray-700 transition-all"
+              'absolute w-6 h-6 bg-black rounded-full z-30 group-hover:bg-gray-700 transition-all'
             )}
           />
         </motion.div>
 
         <GTypography
-          size="xl"
+          size="lg"
           weight="lg"
-          className={cn(
-            `absolute -top-5/12 ${yearPosition}-12/12 z-0 pointer-events-none`
-          )}
+          className="absolute top-1/2 -translate-y-1/2 z-0 pointer-events-none left-[calc(100%+10px)]"
         >
           {year}
         </GTypography>
@@ -195,4 +192,4 @@ export const GStep = React.forwardRef<HTMLDivElement, GStepProps>(
     );
   }
 );
-GStep.displayName = "GStep";
+GStep.displayName = 'GStep';

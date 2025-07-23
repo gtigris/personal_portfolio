@@ -91,13 +91,13 @@ export default function GSlotText({ text, className }: GSlotTextProps) {
       }
       transition={{
         duration: 0.3,
-        repeat: !hasAnimated || isGlitching ? Infinity : 0,
+        repeat: !hasAnimated || isGlitching ? Number.POSITIVE_INFINITY : 0,
         repeatType: "loop",
         ease: "easeInOut",
       }}
     >
       {displayed.map((char, i) => (
-        <span key={i} className={cn(className)}>
+        <span key={`char-${i}-${text.length}`} className={cn(className)}>
           {char === " " ? "\u00A0" : char}
         </span>
       ))}

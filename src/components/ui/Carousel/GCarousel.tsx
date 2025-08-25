@@ -92,12 +92,12 @@ export const GCarousel = React.forwardRef<HTMLDivElement, GCarouselProps>(
 
     return (
       <Carousel
-        className={cn(className, 'w-full')}
+        className={cn(className, 'w-full overflow-visible')}
         ref={ref}
         setApi={setApi}
         {...props}
       >
-        <CarouselContent className="-ml-1">
+        <CarouselContent className="-ml-1 overflow-visible">
           {allSlides.map((index) => {
             const isDummy = index === -1 || index === -2;
             const handleClick = () => {
@@ -112,17 +112,24 @@ export const GCarousel = React.forwardRef<HTMLDivElement, GCarouselProps>(
               <CarouselItem
                 key={index}
                 className={cn(
-                  'lg:basis-1/3 transition-all duration-300 flex justify-center items-center',
-                  !isDummy && current !== index && 'opacity-50'
+                  'lg:basis-1/3 transition-all duration-300 flex justify-center items-center px-2 py-4 overflow-visible',
+                  !isDummy &&
+                    current !== index &&
+                    'opacity-50 hover:opacity-75',
+                  !isDummy && 'hover:scale-105 group'
                 )}
               >
                 {isDummy ? (
-                  <div className="w-full h-full invisible" />
+                  <div
+                    className="w-full h-full invisible"
+                    aria-hidden="true"
+                    aria-label="Carousel placeholder item, not meant to be visible or indexed"
+                  />
                 ) : (
                   <>
                     <button
                       type="button"
-                      className="p-0 m-0 border-none bg-transparent text-left inline-block w-fit h-fit cursor-pointer"
+                      className="p-2 m-0 border-none bg-transparent text-left inline-block w-fit h-fit cursor-pointer transition-transform duration-300 ease-in-out overflow-visible"
                       tabIndex={0}
                       onClick={handleClick} //TODO: move this to parent
                       onKeyDown={(e) => {
@@ -141,30 +148,41 @@ export const GCarousel = React.forwardRef<HTMLDivElement, GCarouselProps>(
                               index >= 0 ? index % cardsData.length : 0
                             ];
                           return (
-                            <GCard
-                              cardTitle={cardData.title}
-                              cardDescription={cardData.description}
-                              cardContent={<p>{cardData.content}</p>}
-                              cardMainVisual={
-                                <GImage
-                                  src={cardData.imageSrc}
-                                  alt={cardData.imageAlt}
-                                  className="w-full h-full object-cover rounded-t-md"
-                                />
-                              }
-                            />
+                            <div className="overflow-visible">
+                              <GCard
+                                className="shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden z-10"
+                                cardTitle={cardData.title}
+                                cardDescription={cardData.description}
+                                cardContent={<p>{cardData.content}</p>}
+                                cardMainVisual={
+                                  <GImage
+                                    src={cardData.imageSrc}
+                                    alt={cardData.imageAlt}
+                                    className="w-full h-full object-cover rounded-t-md transition-transform duration-300 group-hover:scale-105"
+                                  />
+                                }
+                              />
+                            </div>
                           );
                         }
 
                         if (contentSource === 'contents' && cardContents) {
                           // Render from cardContents array
-                          return cardContents[
-                            index >= 0 ? index % cardContents.length : 0
-                          ];
+                          return (
+                            <div className="overflow-visible">
+                              {
+                                cardContents[
+                                  index >= 0 ? index % cardContents.length : 0
+                                ]
+                              }
+                            </div>
+                          );
                         }
 
                         // Default: render the same cardContent for all items
-                        return cardContent;
+                        return (
+                          <div className="overflow-visible">{cardContent}</div>
+                        );
                       })()}
                     </button>
                   </>

@@ -3,6 +3,23 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import GTypography from '../Typography/GTypography';
 
+// SVG dimensions - single source of truth
+const SVG_DIMENSIONS = {
+  viewBox: '0 0 100 100',
+  center: { x: 50, y: 50 },
+  strokeWidth: 2,
+  radii: {
+    hover: 47, // Outer-most hover circle
+    outer: 47, // Spinning dashed outer ring (same as hover circle)
+    inner: 26, // Spinning dashed inner ring
+  },
+  // Pre-calculated dash arrays (circumference / 2 for equal dashes and gaps)
+  dashArrays: {
+    outer: '36.65 36.65', // ≈ 2 * PI * 47 / 8 (updated for radius 47)
+    inner: '40.8 40.8', // ≈ 2 * PI * 26 / 4
+  },
+};
+
 //GStep
 const ringVariants = {
   hidden: {
@@ -106,7 +123,7 @@ export const GStep = React.forwardRef<HTMLDivElement, GStepProps>(
           {/* Hover */}
           <motion.svg
             className="absolute w-full h-full z-25 will-change-transform"
-            viewBox="0 0 100 100"
+            viewBox={SVG_DIMENSIONS.viewBox}
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
@@ -115,18 +132,18 @@ export const GStep = React.forwardRef<HTMLDivElement, GStepProps>(
             initial={false}
           >
             <motion.circle
-              cx="50"
-              cy="50"
-              r="42"
+              cx={SVG_DIMENSIONS.center.x}
+              cy={SVG_DIMENSIONS.center.y}
+              r={SVG_DIMENSIONS.radii.hover}
               stroke="black"
-              strokeWidth="2"
+              strokeWidth={SVG_DIMENSIONS.strokeWidth}
               strokeLinecap="butt"
             />
           </motion.svg>
           {/* Outer Ring */}
           <motion.svg
             className="absolute w-full h-full z-10 will-change-transform"
-            viewBox="0 0 100 100"
+            viewBox={SVG_DIMENSIONS.viewBox}
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
@@ -135,12 +152,12 @@ export const GStep = React.forwardRef<HTMLDivElement, GStepProps>(
             initial={false}
           >
             <motion.circle
-              cx="50"
-              cy="50"
-              r="43"
+              cx={SVG_DIMENSIONS.center.x}
+              cy={SVG_DIMENSIONS.center.y}
+              r={SVG_DIMENSIONS.radii.outer}
               stroke="black"
-              strokeWidth="2"
-              strokeDasharray="33.5 33.5"
+              strokeWidth={SVG_DIMENSIONS.strokeWidth}
+              strokeDasharray={SVG_DIMENSIONS.dashArrays.outer}
               strokeLinecap="butt"
               variants={spinCWVariants}
             />
@@ -149,7 +166,7 @@ export const GStep = React.forwardRef<HTMLDivElement, GStepProps>(
           {/* Inner Ring */}
           <motion.svg
             className="absolute w-full h-full z-10 will-change-transform"
-            viewBox="0 0 100 100"
+            viewBox={SVG_DIMENSIONS.viewBox}
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
@@ -158,14 +175,15 @@ export const GStep = React.forwardRef<HTMLDivElement, GStepProps>(
             initial={false}
           >
             <motion.circle
-              cx="50"
-              cy="50"
-              r="26"
+              cx={SVG_DIMENSIONS.center.x}
+              cy={SVG_DIMENSIONS.center.y}
+              r={SVG_DIMENSIONS.radii.inner}
               stroke="grey"
-              strokeWidth="2"
-              strokeDasharray="40.8 40.8"
+              strokeWidth={SVG_DIMENSIONS.strokeWidth}
+              strokeDasharray={SVG_DIMENSIONS.dashArrays.inner}
               strokeLinecap="butt"
               variants={spinCCWVariants}
+              className={'bg-red-400'}
             />
           </motion.svg>
 
